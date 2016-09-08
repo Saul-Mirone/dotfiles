@@ -15,6 +15,7 @@ Plugin 'Lokaltog/vim-powerline' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
 Plugin 'scrooloose/syntastic' "语法检查
+Plugin 'leafgarland/typescript-vim' "typescript高亮
 
 call vundle#end()            " required
 filetype plugin indent on    " required
