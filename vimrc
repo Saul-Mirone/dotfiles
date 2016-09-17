@@ -158,7 +158,10 @@ set laststatus=2 " Always display the status line
 set statusline+=%{fugitive#statusline()} "  Git Hotness
 
 " Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
+noremap <Leader>r :RunInInteractiveShell<space>
+
+" Compaile and run c program
+map <Leader>q :w<CR>:!gcc % -o %< && ./%< <CR>
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
