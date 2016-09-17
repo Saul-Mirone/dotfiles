@@ -119,9 +119,6 @@ set linespace=2
 set whichwrap=b,s,<,>,[,]
 " 开启Normal或Visual模式下Backspace键，空格键，左方向键，右方向键，Insert或replace模式下左方向键，右方向键跳行的功能。
 
-set nowrap
-" 禁止折行
-
 " NERD tree
 let NERDChristmasTree=0
 let NERDTreeWinSize=20
