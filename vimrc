@@ -35,9 +35,6 @@ let mapleader=","
 set confirm
 " 在处理未保存或只读文件的时候，弹出确认
 
-set fu
-"全屏开启
-
 syntax on
 " 语法高亮
 
@@ -77,7 +74,19 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 " 编码设置
 
 syntax enable
-set background=light
+
+if has('gui_running')
+else
+  set t_Co=256
+  let g:solarized_termcolors=256
+endif
+
+if strftime('%H') > 21 || strftime('%H') < 9
+  set background=dark
+else
+  set background=light
+endif
+
 colorscheme solarized
 set guifont=Monaco:h14
 " 设置颜色主题
@@ -155,10 +164,10 @@ set laststatus=2 " Always display the status line
 set statusline+=%{fugitive#statusline()} "  Git Hotness
 
 " Run commands that require an interactive shell
-noremap <Leader>r :RunInInteractiveShell<space>
+nnoremap <Leader>r :RunInInteractiveShell<space>
 
 " Compaile and run c program
-map <Leader>q :w<CR>:!gcc % -o %< && ./%< <CR>
+map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
