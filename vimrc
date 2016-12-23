@@ -16,6 +16,8 @@ Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
 Plugin 'scrooloose/syntastic' "语法检查
 Plugin 'leafgarland/typescript-vim' "typescript高亮
+Plugin 'iamcco/markdown-preview.vim' "markdown预览
+Plugin 'iamcco/mathjax-support-for-mkdp' "markdown预览依赖
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -169,12 +171,33 @@ nnoremap <Leader>r :RunInInteractiveShell<space>
 " Compaile and run c program
 map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
 
+" Run ErrorCheck
+map <Leader>w :w<CR>:Error<CR>
+
+" Run MarkdownPreview
+map <silent> <Leader>z :w<CR>:MarkdownPreview<CR>
+" Stop MarkdownPreview
+map <silent> <Leader>x :w<CR>:StopMarkdownPreview<CR>
+" MarkdownPreview config
+let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+
 " configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:syntastic_check_on_open=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
