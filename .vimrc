@@ -21,6 +21,7 @@ Plugin 'iamcco/mathjax-support-for-mkdp' "markdown预览依赖
 Plugin 'pangloss/vim-javascript' "javascript高亮
 Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
+Plugin 'ternjs/tern_for_vim' "JS结构预览
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -86,7 +87,7 @@ else
   let g:solarized_termcolors=256
 endif
 
-if strftime('%H') > 21 || strftime('%H') < 9
+if strftime('%H') >= 21 || strftime('%H') <= 9
   set background=dark
 else
   set background=light
