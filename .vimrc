@@ -14,7 +14,8 @@ Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
 Plugin 'Lokaltog/vim-powerline' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
-Plugin 'scrooloose/syntastic' "语法检查
+" Plugin 'scrooloose/syntastic' "语法检查
+Plugin 'w0rp/ale' "异步语法检查
 Plugin 'leafgarland/typescript-vim' "typescript高亮
 Plugin 'iamcco/markdown-preview.vim' "markdown预览
 Plugin 'iamcco/mathjax-support-for-mkdp' "markdown预览依赖
@@ -81,20 +82,24 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 
 syntax enable
 
-if has('gui_running')
-else
+if !has('gui_running')
   set t_Co=256
-  let g:solarized_termcolors=256
-endif
-
-if strftime('%H') >= 21 || strftime('%H') <= 9
-  set background=dark
+  colorscheme Tomorrow-Night
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 else
-  set background=light
+  if strftime('%H') >= 21 || strftime('%H') <= 9
+    set background=dark
+  else
+    set background=light
+  endif
+  colorscheme solarized
+  call togglebg#map("<F2>")
 endif
 
-colorscheme solarized
-set guifont=Monaco:h14
+
+set guifont=Monaco:h20
 " 设置颜色主题
 
 set langmenu=zn_CN.UTF-8
@@ -175,9 +180,6 @@ nnoremap <Leader>r :RunInInteractiveShell<space>
 " Compaile and run c program
 map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
 
-" Run ErrorCheck
-map <Leader>w :w<CR>:Error<CR>
-
 " Run MarkdownPreview
 map <silent> <Leader>z :w<CR>:MarkdownPreview<CR>
 " Stop MarkdownPreview
@@ -185,27 +187,12 @@ map <silent> <Leader>x :w<CR>:StopMarkdownPreview<CR>
 " MarkdownPreview config
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 
-" configure syntastic syntax checking to check on open as well as save
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
 
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-" let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
+" Ale
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '?'
 
 " JavaScript hightlight
 let g:javascript_plugin_jsdoc = 1
