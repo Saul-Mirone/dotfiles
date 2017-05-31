@@ -9,17 +9,19 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree'  "文件浏览
+Plugin 'altercation/vim-colors-solarized' "solarized
+Plugin 'joshdick/onedark.vim' "onedark
 Plugin 'Tagbar' "结构预览
 Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
-Plugin 'Lokaltog/vim-powerline' "状态栏
+Plugin 'itchyny/lightline.vim' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
-" Plugin 'scrooloose/syntastic' "语法检查
 Plugin 'w0rp/ale' "异步语法检查
 Plugin 'leafgarland/typescript-vim' "typescript高亮
 Plugin 'iamcco/markdown-preview.vim' "markdown预览
 Plugin 'iamcco/mathjax-support-for-mkdp' "markdown预览依赖
 Plugin 'pangloss/vim-javascript' "javascript高亮
+Plugin 'mxw/vim-jsx' "react高亮
 Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
 Plugin 'ternjs/tern_for_vim' "JS结构预览
@@ -84,10 +86,17 @@ syntax enable
 
 if !has('gui_running')
   set t_Co=256
-  colorscheme Tomorrow-Night
+  if has('termguicolors')
+    set termguicolors
+  end
+  colorscheme onedark
+  let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ }
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  set timeoutlen=1000 ttimeoutlen=0
 else
   if strftime('%H') >= 21 || strftime('%H') <= 9
     set background=dark
@@ -96,6 +105,9 @@ else
   endif
   colorscheme solarized
   call togglebg#map("<F2>")
+  let g:lightline = {
+    \ 'colorscheme': 'solarized',
+    \ }
 endif
 
 
@@ -136,26 +148,24 @@ set wildmenu
 set linespace=2
 " 字符间插入的像素行数目
 
-set whichwrap=b,s,<,>,[,]
-" 开启Normal或Visual模式下Backspace键，空格键，左方向键，右方向键，Insert或replace模式下左方向键，右方向键跳行的功能。
-
 " NERD tree
 let NERDChristmasTree=0
 let NERDTreeWinSize=20
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="left"
+let NERDTreeWinPos="right"
 " Automatically open a NERDTree if no files where specified
 autocmd vimenter * if !argc() | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Open a NERDTree
-nmap <F5> :NERDTreeToggle<cr>
+nmap <F5> :NERDTreeToggle<CR>
 
 " Tagbar
-let g:tagbar_width=35
+let g:tagbar_width=20
 let g:tagbar_autofocus=1
+let g:tagbar_left = 1
 nmap <F6> :TagbarToggle<CR>
 
 " ctrlp
@@ -170,9 +180,17 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" powerline
+" lightline
 set laststatus=2 " Always display the status line
-set statusline+=%{fugitive#statusline()} "  Git Hotness
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
@@ -195,6 +213,7 @@ let g:ale_sign_error = '!'
 let g:ale_sign_warning = '?'
 
 " JavaScript hightlight
+let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
