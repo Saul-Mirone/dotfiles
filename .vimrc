@@ -163,7 +163,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 nmap <F5> :NERDTreeToggle<CR>
 
 " Tagbar
-let g:tagbar_width=20
+let g:tagbar_width=35
 let g:tagbar_autofocus=1
 let g:tagbar_left = 1
 nmap <F6> :TagbarToggle<CR>
@@ -188,9 +188,22 @@ let g:lightline = {
   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'fugitive#head',
   \ },
+  \ 'component': {
+  \   'modified': '%#ModifiedColor#%{LightlineModified()}',
   \ }
+  \ }
+function! LightlineModified()
+  let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
+  let mode = get(map, mode()[0], mode()[0])
+  let bgcolor = {'n': [240, '#585858'], 'i': [31, '#0087af']}
+  let color = get(bgcolor, mode, bgcolor.n)
+  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
+  \ color[0], color[1])
+  return &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
