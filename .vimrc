@@ -180,19 +180,35 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" Ale
+let g:ale_linters = {
+\  'javascript': ['flow', 'eslint']
+\}
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:ale_sign_error = '☠'
+let g:ale_sign_warning = '☹'
+
+let g:ale_echo_msg_format = '[%linter%] %s'
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+
 " lightline
 set laststatus=2 " Always display the status line
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'ale' ] ]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'fugitive#head',
   \ },
   \ 'component': {
   \   'modified': '%#ModifiedColor#%{LightlineModified()}',
-  \ }
+  \   'ale': '%{LinterStatus()}',
+  \ },
   \ }
 function! LightlineModified()
   let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
@@ -204,6 +220,16 @@ function! LightlineModified()
   return &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '' : printf(
+    \   '%d☠  %d☹',
+    \   all_errors,
+    \   all_non_errors
+    \)
+endfunction
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
@@ -219,11 +245,6 @@ map <silent> <Leader>x :w<CR>:StopMarkdownPreview<CR>
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 
 
-" Ale
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_sign_error = '!'
-let g:ale_sign_warning = '?'
 
 " JavaScript hightlight
 let g:jsx_ext_required = 0
