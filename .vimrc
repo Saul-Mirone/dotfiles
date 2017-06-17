@@ -10,8 +10,10 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree'  "文件浏览
 Plugin 'altercation/vim-colors-solarized' "solarized
-Plugin 'joshdick/onedark.vim' "onedark
+Plugin 'joshdick/onedark.vim' "onedark theme
+Plugin 'dracula/vim' "dracula theme
 Plugin 'Tagbar' "结构预览
+Plugin 'haskell.vim' "Haskell language
 Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
 Plugin 'itchyny/lightline.vim' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
@@ -25,6 +27,9 @@ Plugin 'mxw/vim-jsx' "react高亮
 Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
 Plugin 'ternjs/tern_for_vim' "JS结构预览
+Plugin 'godlygeek/tabular' "自动对齐
+Plugin 'eagletmt/ghcmod-vim' "ghc-mod
+Plugin 'Shougo/vimproc.vim' "async
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -60,10 +65,10 @@ set autoindent
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set expandtab
+set shiftround
 "  统一缩进为2
 
-set expandtab
-" 不要用空格代替制表符
 
 set number
 " 显示行号
@@ -180,6 +185,10 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" tabular
+nnoremap <leader>t :Tab/
+vnoremap <leader>t :Tab/
+
 " Ale
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint']
@@ -245,12 +254,17 @@ map <silent> <Leader>x :w<CR>:StopMarkdownPreview<CR>
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 
 
-
 " JavaScript hightlight
 let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
+
+" Haskell ghc-mode
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
 
 "open rainbow
 let g:rainbow_active = 1
