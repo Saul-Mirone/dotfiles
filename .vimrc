@@ -191,7 +191,8 @@ vnoremap <leader>t :Tab/
 
 " Ale
 let g:ale_linters = {
-\  'javascript': ['flow', 'eslint']
+\  'javascript': ['flow', 'eslint'],
+\  'haskell': ['ghc', 'ghc-mod', 'hint']
 \}
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
