@@ -7,18 +7,21 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'L9'
-Plugin 'scrooloose/nerdtree'  "文件浏览
-Plugin 'altercation/vim-colors-solarized' "solarized
+Plugin 'altercation/vim-colors-solarized' "solarized theme
 Plugin 'joshdick/onedark.vim' "onedark theme
 Plugin 'dracula/vim' "dracula theme
+Plugin 'L9'
+Plugin 'scrooloose/nerdtree'  "文件浏览
+Plugin 'godlygeek/tabular' "自动对齐
 Plugin 'Tagbar' "结构预览
-Plugin 'haskell.vim' "Haskell language
 Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
 Plugin 'itchyny/lightline.vim' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
-Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
+Plugin 'Shougo/vimproc.vim' "async
 Plugin 'w0rp/ale' "异步语法检查
+
+Plugin 'haskell.vim' "Haskell language
+Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
 Plugin 'leafgarland/typescript-vim' "typescript高亮
 Plugin 'iamcco/markdown-preview.vim' "markdown预览
 Plugin 'iamcco/mathjax-support-for-mkdp' "markdown预览依赖
@@ -27,9 +30,8 @@ Plugin 'mxw/vim-jsx' "react高亮
 Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
 Plugin 'ternjs/tern_for_vim' "JS结构预览
-Plugin 'godlygeek/tabular' "自动对齐
 Plugin 'eagletmt/ghcmod-vim' "ghc-mod
-Plugin 'Shougo/vimproc.vim' "async
+Plugin 'Saul-Mirone/lushtags-fix' "haskell结构预览
 
 call vundle#end()            " required
 filetype plugin indent on    " required
