@@ -19,12 +19,10 @@ Plugin 'itchyny/lightline.vim' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'Shougo/vimproc.vim' "async
 Plugin 'w0rp/ale' "异步语法检查
+Plugin 'Yggdroot/indentLine' "垂直参考线
 
 Plugin 'haskell.vim' "Haskell language
-Plugin 'christoomey/vim-run-interactive' "快捷terminal命令
 Plugin 'leafgarland/typescript-vim' "typescript高亮
-Plugin 'iamcco/markdown-preview.vim' "markdown预览
-Plugin 'iamcco/mathjax-support-for-mkdp' "markdown预览依赖
 Plugin 'pangloss/vim-javascript' "javascript高亮
 Plugin 'mxw/vim-jsx' "react高亮
 Plugin 'tpope/vim-rails' "rails.vim
@@ -243,19 +241,8 @@ function! LinterStatus() abort
     \)
 endfunction
 
-" Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
-
 " Compaile and run c program
 map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
-
-" Run MarkdownPreview
-map <silent> <Leader>z :w<CR>:MarkdownPreview<CR>
-" Stop MarkdownPreview
-map <silent> <Leader>x :w<CR>:StopMarkdownPreview<CR>
-" MarkdownPreview config
-let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
-
 
 " JavaScript hightlight
 let g:jsx_ext_required = 0
