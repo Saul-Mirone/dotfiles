@@ -94,10 +94,8 @@ if !has('gui_running')
   if has('termguicolors')
     set termguicolors
   end
-  colorscheme onedark
-  let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ }
+  colorscheme dracula
+  let lightlineColor = 'Dracula'
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -110,9 +108,10 @@ else
   endif
   colorscheme solarized
   call togglebg#map("<F2>")
-  let g:lightline = {
-    \ 'colorscheme': 'solarized',
-    \ }
+  "let g:lightline = {
+  "  \ 'colorscheme': 'solarized',
+  "  \ }
+  let lightlineColor = 'solarized'
 endif
 
 
@@ -208,6 +207,7 @@ nnoremap <leader>ap :ALEPreviousWrap<cr>
 " lightline
 set laststatus=2 " Always display the status line
 let g:lightline = {
+  \ 'colorscheme': lightlineColor,
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'ale' ] ]
