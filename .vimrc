@@ -223,7 +223,7 @@ let g:lightline = {
 function! LightlineModified()
   let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
   let mode = get(map, mode()[0], mode()[0])
-  let bgcolor = {'n': [240, '#585858'], 'i': [31, '#0087af']}
+  let bgcolor = {'n': [240, '#454759'], 'i': [31, '#454759']}
   let color = get(bgcolor, mode, bgcolor.n)
   exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
   \ color[0], color[1])
