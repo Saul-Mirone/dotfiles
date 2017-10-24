@@ -20,6 +20,7 @@ Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'Shougo/vimproc.vim' "async
 Plugin 'w0rp/ale' "异步语法检查
 Plugin 'Yggdroot/indentLine' "垂直参考线
+Plugin 'severin-lemaignan/vim-minimap' "预览图
 
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
@@ -29,7 +30,8 @@ Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
 Plugin 'ternjs/tern_for_vim' "JS结构预览
 Plugin 'eagletmt/ghcmod-vim' "ghc-mod
-Plugin 'Saul-Mirone/lushtags-fix' "haskell结构预览
+Plugin 'bitc/lushtags' "haskell结构预览
+Plugin 'npm.vim' "npm commands
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -45,6 +47,8 @@ filetype plugin indent on    " required
 
 let mapleader=","
 "设置leader键为,
+
+set re=1
 
 set confirm
 " 在处理未保存或只读文件的时候，弹出确认
@@ -108,9 +112,6 @@ else
   endif
   colorscheme solarized
   call togglebg#map("<F2>")
-  "let g:lightline = {
-  "  \ 'colorscheme': 'solarized',
-  "  \ }
   let lightlineColor = 'solarized'
 endif
 
@@ -152,6 +153,8 @@ set wildmenu
 set linespace=2
 " 字符间插入的像素行数目
 
+set foldmethod=indent
+
 " NERD tree
 let NERDChristmasTree=0
 let NERDTreeWinSize=20
@@ -171,6 +174,24 @@ let g:tagbar_width=35
 let g:tagbar_autofocus=1
 let g:tagbar_left = 1
 nmap <F6> :TagbarToggle<CR>
+let g:tagbar_type_typescript = {                                                  
+  \ 'ctagsbin' : 'tstags',                                                        
+  \ 'ctagsargs' : '-f-',                                                           
+  \ 'kinds': [                                                                     
+    \ 'e:enums:0:1',                                                               
+    \ 'f:function:0:1',                                                            
+    \ 't:typealias:0:1',                                                           
+    \ 'M:Module:0:1',                                                              
+    \ 'I:import:0:1',                                                              
+    \ 'i:interface:0:1',                                                           
+    \ 'C:class:0:1',                                                               
+    \ 'm:method:0:1',                                                              
+    \ 'p:property:0:1',                                                            
+    \ 'v:variable:0:1',                                                            
+    \ 'c:const:0:1',                                                              
+  \ ],                                                                            
+  \ 'sort' : 0                                                                    
+\ } 
 
 " ctrlp
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
@@ -190,17 +211,19 @@ vnoremap <leader>t :Tab/
 
 " Ale
 let g:ale_linters = {
-\  'javascript': ['flow', 'eslint'],
-\  'haskell': ['ghc', 'ghc-mod', 'hint']
+\  'javascript': ['eslint'],
+\  'typescript': ['tslint', 'tsserver'],
+\  'haskell': ['ghc-mod', 'hint']
 \}
-let g:ale_sign_column_always = 1
+let g:ale_echo_cursor = 1
+let g:ale_open_list = 1
+let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-let g:ale_sign_error = '☠'
-let g:ale_sign_warning = '☹'
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 
 let g:ale_echo_msg_format = '[%linter%] %s'
+nnoremap <leader>e :ALEToggle<cr>
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
@@ -213,21 +236,17 @@ let g:lightline = {
   \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'ale' ] ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
+  \   'gitbranch': 'LightlineFugitive',
   \ },
   \ 'component': {
-  \   'modified': '%#ModifiedColor#%{LightlineModified()}',
   \   'ale': '%{LinterStatus()}',
   \ },
   \ }
-function! LightlineModified()
-  let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
-  let mode = get(map, mode()[0], mode()[0])
-  let bgcolor = {'n': [240, '#454759'], 'i': [31, '#454759']}
-  let color = get(bgcolor, mode, bgcolor.n)
-  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
-  \ color[0], color[1])
-  return &modified ? '+' : &modifiable ? '' : '-'
+function! LightlineFugitive()
+  if &ft !~? 'vimfiler' && exists('*fugitive#head')
+    return fugitive#head()
+  endif
+  return ''
 endfunction
 
 function! LinterStatus() abort
@@ -235,11 +254,17 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
     return l:counts.total == 0 ? '' : printf(
-    \   '%d☠  %d☹',
+    \   '%dE  %dW',
     \   all_errors,
     \   all_non_errors
     \)
 endfunction
+
+" minimap
+let g:minimap_highlight='WarningMsg'
+
+" json
+map <Leader>json :%!python -m json.tool<CR>gg=G
 
 " Compaile and run c program
 map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
@@ -251,10 +276,10 @@ let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 
 " Haskell ghc-mode
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
+map <leader>ghcw :GhcModTypeInsert<CR>
+map <leader>ghcs :GhcModSplitFunCase<CR>
+map <leader>ghcq :GhcModType<CR>
+map <leader>ghce :GhcModTypeClear<CR>
 
 "open rainbow
 let g:rainbow_active = 1
