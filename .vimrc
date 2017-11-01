@@ -12,6 +12,7 @@ Plugin 'joshdick/onedark.vim' "onedark theme
 Plugin 'dracula/vim' "dracula theme
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree'  "文件浏览
+Plugin 'Xuyuanp/nerdtree-git-plugin' "nerdtree的git插件
 Plugin 'godlygeek/tabular' "自动对齐
 Plugin 'Tagbar' "结构预览
 Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
@@ -21,6 +22,7 @@ Plugin 'Shougo/vimproc.vim' "async
 Plugin 'w0rp/ale' "异步语法检查
 Plugin 'Yggdroot/indentLine' "垂直参考线
 Plugin 'severin-lemaignan/vim-minimap' "预览图
+Plugin 'airblade/vim-gitgutter' "vim git提示
 
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
@@ -268,6 +270,10 @@ map <Leader>json :%!python -m json.tool<CR>gg=G
 
 " Compaile and run c program
 map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
+
+" gitgutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " JavaScript hightlight
 let g:jsx_ext_required = 0
