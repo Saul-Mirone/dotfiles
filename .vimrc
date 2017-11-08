@@ -156,6 +156,7 @@ set linespace=2
 " 字符间插入的像素行数目
 
 set foldmethod=indent
+set nofoldenable
 
 " NERD tree
 let NERDChristmasTree=0
@@ -172,7 +173,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 nmap <F5> :NERDTreeToggle<CR>
 
 " Tagbar
-let g:tagbar_width=35
+let g:tagbar_width=20
 let g:tagbar_autofocus=1
 let g:tagbar_left = 1
 nmap <F6> :TagbarToggle<CR>
@@ -215,7 +216,8 @@ vnoremap <leader>t :Tab/
 let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint', 'tsserver'],
-\  'haskell': ['ghc-mod', 'hint']
+\  'haskell': ['ghc-mod', 'hint'],
+\  'cpp': ['clang', 'cpplint', 'g++']
 \}
 let g:ale_echo_cursor = 1
 let g:ale_open_list = 1
@@ -269,7 +271,7 @@ let g:minimap_highlight='WarningMsg'
 map <Leader>json :%!python -m json.tool<CR>gg=G
 
 " Compaile and run c program
-map <Leader>q :w<CR>:!clang % -o %< && ./%< <CR>
+map <Leader>q :w<CR>:!clang++ % -o %< && ./%< <CR>
 
 " gitgutter
 let g:gitgutter_realtime = 0
