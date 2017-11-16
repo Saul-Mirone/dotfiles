@@ -23,6 +23,7 @@ Plugin 'w0rp/ale' "异步语法检查
 Plugin 'Yggdroot/indentLine' "垂直参考线
 Plugin 'severin-lemaignan/vim-minimap' "预览图
 Plugin 'airblade/vim-gitgutter' "vim git提示
+Plugin 'kshenoy/vim-signature' "可视化书签
 
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
