@@ -217,7 +217,7 @@ vnoremap <leader>t :Tab/
 let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint', 'tsserver'],
-\  'haskell': ['ghc-mod', 'hint'],
+\  'haskell': ['stack-ghc-mod', 'hint'],
 \  'cpp': ['clang', 'cpplint', 'g++']
 \}
 let g:ale_echo_cursor = 1
