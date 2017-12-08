@@ -56,7 +56,9 @@ set re=1
 set confirm
 " 在处理未保存或只读文件的时候，弹出确认
 
-syntax on
+if !exists("g:syntax_on")
+  syntax enable
+endif
 " 语法高亮
 
 autocmd InsertLeave * se nocul
@@ -93,8 +95,6 @@ set gdefault
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
 " 编码设置
-
-syntax enable
 
 if !has('gui_running')
   set t_Co=256
@@ -217,7 +217,7 @@ vnoremap <leader>t :Tab/
 let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint', 'tsserver'],
-\  'haskell': ['stack-ghc-mod', 'hint'],
+\  'haskell': ['stack-ghc-mod', 'hlint'],
 \  'cpp': ['clang', 'cpplint', 'g++']
 \}
 let g:ale_echo_cursor = 1
@@ -226,6 +226,10 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+if !has('gui_running')
+  highlight ALEError cterm=underline
+  highlight ALEWarning cterm=underline
+endif
 
 let g:ale_echo_msg_format = '[%linter%] %s'
 nnoremap <leader>e :ALEToggle<cr>
