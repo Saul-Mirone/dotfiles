@@ -98,14 +98,22 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 
 if !has('gui_running')
   set t_Co=256
-  if has('termguicolors')
+  if has('termguicolors') && ($TERM != "xterm-256color")
     set termguicolors
   end
   colorscheme dracula
   let lightlineColor = 'Dracula'
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+  if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\e[4 q\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+  else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
+
   set timeoutlen=1000 ttimeoutlen=0
 else
   if strftime('%H') >= 21 || strftime('%H') <= 9
@@ -226,15 +234,15 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
-if !has('gui_running')
-  highlight ALEError cterm=underline
-  highlight ALEWarning cterm=underline
-endif
 
 let g:ale_echo_msg_format = '[%linter%] %s'
 nnoremap <leader>e :ALEToggle<cr>
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
+if !has('gui_running')
+  highlight ALEError cterm=underline
+  highlight ALEWarning cterm=underline
+endif
 
 " lightline
 set laststatus=2 " Always display the status line
