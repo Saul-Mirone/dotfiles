@@ -35,6 +35,7 @@ Plugin 'ternjs/tern_for_vim' "JS结构预览
 Plugin 'eagletmt/ghcmod-vim' "ghc-mod
 Plugin 'bitc/lushtags' "haskell结构预览
 Plugin 'npm.vim' "npm commands
+Plugin 'tpope/vim-obsession' "vim session store
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -98,7 +99,7 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 
 if !has('gui_running')
   set t_Co=256
-  if has('termguicolors') && ($TERM != "xterm-256color")
+  if has('termguicolors') && !exists('$TMUX')
     set termguicolors
   end
   colorscheme dracula
@@ -250,13 +251,14 @@ let g:lightline = {
   \ 'colorscheme': lightlineColor,
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'ale' ] ]
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'session', 'ale' ] ]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'LightlineFugitive',
   \ },
   \ 'component': {
   \   'ale': '%{LinterStatus()}',
+  \   'session': '%{ObsessionStatus()}'
   \ },
   \ }
 function! LightlineFugitive()
