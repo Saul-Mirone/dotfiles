@@ -128,8 +128,8 @@ else
 endif
 
 
-set guifont=Monaco:h20
-" 设置颜色主题
+set guifont=Monaco:h18
+" 设置字体
 
 set langmenu=zn_CN.UTF-8
 set helplang=cn
