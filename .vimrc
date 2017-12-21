@@ -227,7 +227,7 @@ let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint', 'tsserver'],
 \  'haskell': ['stack-ghc-mod', 'hlint'],
-\  'cpp': ['clang', 'cpplint', 'g++']
+\  'cpp': ['clang', 'cpplint']
 \}
 let g:ale_echo_cursor = 1
 let g:ale_open_list = 1
@@ -286,7 +286,7 @@ let g:minimap_highlight='WarningMsg'
 map <Leader>json :%!python -m json.tool<CR>gg=G
 
 " Compaile and run c program
-map <Leader>q :w<CR>:!clang++ % -o %< && ./%< <CR>
+map <Leader>q :w<CR>:!clang++ -stdlib=libc++ -std=c++1z % -o %< && ./%< <CR>
 
 " gitgutter
 let g:gitgutter_realtime = 0
