@@ -36,6 +36,7 @@ Plugin 'eagletmt/ghcmod-vim' "ghc-mod
 Plugin 'bitc/lushtags' "haskell结构预览
 Plugin 'npm.vim' "npm commands
 Plugin 'tpope/vim-obsession' "vim session store
+Plugin 'Quramy/tsuquyomi' "typescript service
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -303,6 +304,9 @@ map <leader>ghcw :GhcModTypeInsert<CR>
 map <leader>ghcs :GhcModSplitFunCase<CR>
 map <leader>ghcq :GhcModType<CR>
 map <leader>ghce :GhcModTypeClear<CR>
+
+" tsuquyomi
+let g:tsuquyomi_disable_quickfix = 1
 
 "open rainbow
 let g:rainbow_active = 1
