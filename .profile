@@ -1,4 +1,4 @@
-export PATH="$PATH:$HOME/.local/bin:$HOME/Library/Haskell/bin:$HOME/.rvm/bin:/usr/local/opt/llvm/bin"
+export PATH="$HOME/.local/bin:$HOME/Library/Haskell/bin:$HOME/.rvm/bin:/usr/local/opt/llvm/bin:$PATH"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
