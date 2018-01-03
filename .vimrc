@@ -24,6 +24,8 @@ Plugin 'Yggdroot/indentLine' "垂直参考线
 Plugin 'severin-lemaignan/vim-minimap' "预览图
 Plugin 'airblade/vim-gitgutter' "vim git提示
 Plugin 'kshenoy/vim-signature' "可视化书签
+Plugin 'junegunn/goyo.vim' "沉浸模式
+Plugin 'junegunn/limelight.vim' "专注模式
 
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
@@ -332,3 +334,12 @@ let g:rainbow_conf = {
 \		'css': 0,
 \	}
 \}
+
+"Goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+let g:goyo_with = '50%'
+let g:goyo_height = '100%'
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = 240
+nmap <F4> :Goyo<CR>
