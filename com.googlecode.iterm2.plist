@@ -225,8 +225,6 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>AE743A3F-19DA-4A11-B455-2A13433A730B</string>
-	<key>DimBackgroundWindows</key>
-	<false/>
 	<key>DimInactiveSplitPanes</key>
 	<false/>
 	<key>DimOnlyText</key>
@@ -340,7 +338,7 @@
 		</dict>
 	</dict>
 	<key>HideTab</key>
-	<true/>
+	<false/>
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HideTabNumber</key>
@@ -406,17 +404,17 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1603 476 445 77 0 0 2560 1440 </string>
+	<string>412 123 445 77 0 0 1366 768 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>2900 496 400 129 2560 -640 1200 1920 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>930 613 700 622 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1530 400 796 473 0 0 2560 1440 </string>
+	<string>1455 512 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2560 1440 0 0 2560 1440 </string>
+	<string>0 715 970 725 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1280 0 1270 1440 0 0 2560 1440 </string>
+	<string>588 673 970 725 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 4 1361 741 0 0 1366 745 </string>
 	<key>New Bookmarks</key>
@@ -983,13 +981,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodeProForPowerline-Medium 18</string>
+			<string>Monaco 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
-			<key>Non-ASCII Ligatures</key>
-			<false/>
 			<key>Normal Font</key>
-			<string>Monaco 18</string>
+			<string>Monaco 20</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1043,7 +1039,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<true/>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1151,15 +1147,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-12-12T07:20:34Z</date>
+	<date>2017-12-04T09:58:28Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<false/>
 	<key>ShowPaneTitles</key>
 	<false/>
-	<key>SplitPaneDimmingAmount</key>
-	<real>0.30969801682692311</real>
 	<key>TabStyle</key>
 	<integer>1</integer>
 	<key>TabViewType</key>

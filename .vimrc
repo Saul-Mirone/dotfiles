@@ -250,23 +250,42 @@ endif
 
 " lightline
 set laststatus=2 " Always display the status line
+set showtabline=2  " Show tabline
+set guioptions-=e  " Don't use GUI tabline
 let g:lightline = {
   \ 'colorscheme': lightlineColor,
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'session', 'ale' ] ]
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+  \             [ 'ale', 'session' ] ]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'LightlineFugitive',
+  \   'readonly': 'LightlineReadonly',
   \ },
   \ 'component': {
   \   'ale': '%{LinterStatus()}',
+  \   'lineinfo': ' %3l:%-2v',
   \   'session': '%{ObsessionStatus()}'
   \ },
+  \ 'separator': {
+  \    'left': '',
+  \    'right': ''
+  \ },
+  \ 'subseparator': {
+  \    'left': '|',
+  \    'right': '|'
   \ }
+  \ }
+
+function! LightlineReadonly()
+		return &readonly ? '' : ''
+	endfunction
+
 function! LightlineFugitive()
   if &ft !~? 'vimfiler' && exists('*fugitive#head')
-    return fugitive#head()
+    let branch = fugitive#head()
+    return branch !=# '' ? ' '.branch : ''
   endif
   return ''
 endfunction
