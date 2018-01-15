@@ -131,7 +131,7 @@ else
 endif
 
 
-set guifont=Monaco:h18
+set guifont=monofur\ for\ Powerline:h20
 " 设置字体
 
 set langmenu=zn_CN.UTF-8
@@ -191,22 +191,22 @@ let g:tagbar_autofocus=1
 let g:tagbar_left = 1
 nmap <F6> :TagbarToggle<CR>
 let g:tagbar_type_typescript = {                                                  
-  \ 'ctagsbin' : 'tstags',                                                        
-  \ 'ctagsargs' : '-f-',                                                           
-  \ 'kinds': [                                                                     
-    \ 'e:enums:0:1',                                                               
-    \ 'f:function:0:1',                                                            
-    \ 't:typealias:0:1',                                                           
-    \ 'M:Module:0:1',                                                              
-    \ 'I:import:0:1',                                                              
-    \ 'i:interface:0:1',                                                           
-    \ 'C:class:0:1',                                                               
-    \ 'm:method:0:1',                                                              
-    \ 'p:property:0:1',                                                            
-    \ 'v:variable:0:1',                                                            
-    \ 'c:const:0:1',                                                              
-  \ ],                                                                            
-  \ 'sort' : 0                                                                    
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
 \ } 
 
 " ctrlp
@@ -256,8 +256,11 @@ let g:lightline = {
   \ 'colorscheme': lightlineColor,
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
-  \             [ 'ale', 'session' ] ]
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'ale', 'session' ] ]
+  \ },
+  \ 'component_visible_condition': {
+  \   'ale': 'AleVisible()',
+  \   'session': 'SessionVisible()',
   \ },
   \ 'component_function': {
   \   'gitbranch': 'LightlineFugitive',
@@ -273,14 +276,23 @@ let g:lightline = {
   \    'right': ''
   \ },
   \ 'subseparator': {
-  \    'left': '|',
-  \    'right': '|'
+  \    'left': '',
+  \    'right': ''
   \ }
   \ }
 
+function! AleVisible()
+  let l:counts = ale#statusline#Count(bufnr(''))
+  return l:counts.total != 0
+endfunction
+
+function! SessionVisible()
+  return ObsessionStatus() != ''
+endfunction
+
 function! LightlineReadonly()
-		return &readonly ? '' : ''
-	endfunction
+  return &readonly ? '' : ''
+endfunction
 
 function! LightlineFugitive()
   if &ft !~? 'vimfiler' && exists('*fugitive#head')
