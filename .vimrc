@@ -26,6 +26,7 @@ Plugin 'airblade/vim-gitgutter' "vim git提示
 Plugin 'kshenoy/vim-signature' "可视化书签
 Plugin 'junegunn/goyo.vim' "沉浸模式
 Plugin 'junegunn/limelight.vim' "专注模式
+Plugin 'jpalardy/vim-slime' "与命令行交互
 
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
@@ -38,7 +39,6 @@ Plugin 'eagletmt/ghcmod-vim' "ghc-mod
 Plugin 'bitc/lushtags' "haskell结构预览
 Plugin 'npm.vim' "npm commands
 Plugin 'tpope/vim-obsession' "vim session store
-Plugin 'Quramy/tsuquyomi' "typescript service
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -326,9 +326,6 @@ map <leader>ghcs :GhcModSplitFunCase<CR>
 map <leader>ghcq :GhcModType<CR>
 map <leader>ghce :GhcModTypeClear<CR>
 
-" tsuquyomi
-let g:tsuquyomi_disable_quickfix = 1
-
 "open rainbow
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -362,3 +359,7 @@ let g:goyo_height = '100%'
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#585858'
 nmap <F4> :Goyo<CR>
+
+"vim-slime
+let g:slime_target = "tmux"
+let g:slime_paste_file = tempname()
