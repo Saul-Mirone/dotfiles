@@ -18,6 +18,7 @@ Plugin 'Tagbar' "结构预览
 Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
 Plugin 'itchyny/lightline.vim' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
+Plugin 'gregsexton/gitv' "git分支可视化
 Plugin 'Shougo/vimproc.vim' "async
 Plugin 'w0rp/ale' "异步语法检查
 Plugin 'Yggdroot/indentLine' "垂直参考线
