@@ -28,6 +28,8 @@ Plugin 'kshenoy/vim-signature' "可视化书签
 Plugin 'junegunn/goyo.vim' "沉浸模式
 Plugin 'junegunn/limelight.vim' "专注模式
 Plugin 'jpalardy/vim-slime' "与命令行交互
+Plugin 'SirVer/ultisnips' "代码片段
+Plugin 'honza/vim-snippets' "代码片段库
 
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
