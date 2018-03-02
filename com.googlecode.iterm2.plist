@@ -406,13 +406,13 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1603 342 445 77 0 0 2560 1440 </string>
+	<string>1603 208 445 77 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>2900 496 400 129 2560 -640 1200 1920 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>930 613 700 622 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>524 426 918 452 0 0 2560 1440 </string>
+	<string>524 604 918 401 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 2560 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -987,13 +987,13 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>GoMonoForPowerline 18</string>
+			<string>MonofurForPowerline 18</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<false/>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>Monaco 18</string>
+			<string>MonofurForPowerline 20</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1047,7 +1047,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<true/>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1155,7 +1155,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-09T01:56:00Z</date>
+	<date>2018-01-17T12:38:47Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>

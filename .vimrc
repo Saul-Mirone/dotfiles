@@ -34,6 +34,7 @@ Plugin 'honza/vim-snippets' "代码片段库
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
 Plugin 'pangloss/vim-javascript' "javascript高亮
+Plugin 'reasonml-editor/vim-reason' "reasonml
 Plugin 'mxw/vim-jsx' "react高亮
 Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
@@ -323,7 +324,7 @@ let g:minimap_highlight='WarningMsg'
 map <Leader>json :%!python -m json.tool<CR>gg=G
 
 " Compaile and run c program
-map <Leader>q :w<CR>:!clang++ -stdlib=libc++ -std=c++1z % -o %< && ./%< <CR>
+map <Leader>q :w<CR>:!clang -stdlib=libc++ -std=c++1z % -o %< && ./%< <CR>
 
 " gitgutter
 let g:gitgutter_realtime = 0
