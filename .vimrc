@@ -4,6 +4,7 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
@@ -16,6 +17,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin' "nerdtree的git插件
 Plugin 'godlygeek/tabular' "自动对齐
 Plugin 'Tagbar' "结构预览
 Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
+Plugin 'junegunn/fzf.vim' "内容搜索
 Plugin 'itchyny/lightline.vim' "状态栏
 Plugin 'tpope/vim-fugitive' "git栏
 Plugin 'gregsexton/gitv' "git分支可视化
@@ -180,6 +182,7 @@ let NERDChristmasTree=0
 let NERDTreeWinSize=20
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowHidden=1
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="right"
 " Automatically open a NERDTree if no files where specified
