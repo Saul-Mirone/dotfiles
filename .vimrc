@@ -1,62 +1,44 @@
-"设置vundle
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=/usr/local/opt/fzf
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'altercation/vim-colors-solarized' "solarized theme
-Plugin 'joshdick/onedark.vim' "onedark theme
-"Plugin 'Saul-Mirone/dracula-vim' "dracula theme
-Plugin 'dracula/vim'
-Plugin 'L9'
-Plugin 'scrooloose/nerdtree'  "文件浏览
-Plugin 'Xuyuanp/nerdtree-git-plugin' "nerdtree的git插件
-Plugin 'godlygeek/tabular' "自动对齐
-Plugin 'Tagbar' "结构预览
-Plugin 'ctrlpvim/ctrlp.vim' "全局搜索
-Plugin 'junegunn/fzf.vim' "内容搜索
-Plugin 'itchyny/lightline.vim' "状态栏
-Plugin 'tpope/vim-fugitive' "git栏
-Plugin 'gregsexton/gitv' "git分支可视化
-Plugin 'Shougo/vimproc.vim' "async
-Plugin 'w0rp/ale' "异步语法检查
-Plugin 'Yggdroot/indentLine' "垂直参考线
-Plugin 'severin-lemaignan/vim-minimap' "预览图
-Plugin 'airblade/vim-gitgutter' "vim git提示
-Plugin 'kshenoy/vim-signature' "可视化书签
-Plugin 'junegunn/goyo.vim' "沉浸模式
-Plugin 'junegunn/limelight.vim' "专注模式
-Plugin 'jpalardy/vim-slime' "与命令行交互
-Plugin 'SirVer/ultisnips' "代码片段
-Plugin 'honza/vim-snippets' "代码片段库
+Plug 'altercation/vim-colors-solarized'
+"Plug 'Saul-Mirone/dracula-vim' "dracula theme
+Plug 'dracula/vim'
+Plug 'vim-scripts/L9'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'w0rp/ale'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'kshenoy/vim-signature'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'luochen1990/rainbow'
+Plug 'tpope/vim-obsession'
 
-Plugin 'haskell.vim' "Haskell language
-Plugin 'leafgarland/typescript-vim' "typescript高亮
-Plugin 'pangloss/vim-javascript' "javascript高亮
-Plugin 'mxw/vim-jsx' "react高亮
-Plugin 'tpope/vim-rails' "rails.vim
-Plugin 'luochen1990/rainbow' "彩虹括号
-Plugin 'ternjs/tern_for_vim' "JS结构预览
-Plugin 'eagletmt/ghcmod-vim' "ghc-mod
-Plugin 'bitc/lushtags' "haskell结构预览
-Plugin 'npm.vim' "npm commands
-Plugin 'tpope/vim-obsession' "vim session store
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'vim-scripts/Tagbar', { 'on': 'TagbarToggle' }
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+Plug 'severin-lemaignan/vim-minimap', { 'on': ['Minimap', 'MinimapToggle'] }
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
+Plug 'jpalardy/vim-slime', { 'on': ['SlimeRegionSend', 'SlimeParagraphSend'] }
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"vundle设置完毕
+Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'bitc/lushtags', { 'for': 'haskell' }
+Plug 'Shougo/vimproc.vim', { 'do' : 'make', 'for': 'haskell' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+Plug 'vim-scripts/npm.vim', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+
+call plug#end()
 
 let mapleader=","
 
@@ -157,8 +139,6 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowHidden=1
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="right"
-" Automatically open a NERDTree if no files where specified
-autocmd vimenter * if !argc() | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Open a NERDTree
@@ -187,18 +167,6 @@ let g:tagbar_type_typescript = {
   \ ],
   \ 'sort' : 0
 \ } 
-
-" ctrlp
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files.
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " Ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
 
 " tabular
 nnoremap <leader>t :Tab/
@@ -350,15 +318,6 @@ let g:goyo_height = '100%'
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#585858'
 nmap <F4> :Goyo<CR>
-function! s:goyo_leave()
-  set showmode
-  set showcmd
-  Limelight!
-  if !has('gui_running')
-    highlight Normal ctermbg=NONE
-  endif
-endfunction
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "vim-slime
 let g:slime_target = "tmux"
@@ -403,3 +362,4 @@ if count(s:opam_available_tools,"ocp-indent") == 0
   source "/Users/mirone/.opam/4.02.3+buckle-1/share/vim/syntax/ocp-indent.vim"
 endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
+"
