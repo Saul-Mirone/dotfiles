@@ -10,7 +10,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'altercation/vim-colors-solarized' "solarized theme
 Plugin 'joshdick/onedark.vim' "onedark theme
-Plugin 'dracula/vim' "dracula theme
+"Plugin 'Saul-Mirone/dracula-vim' "dracula theme
+Plugin 'dracula/vim'
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree'  "文件浏览
 Plugin 'Xuyuanp/nerdtree-git-plugin' "nerdtree的git插件
@@ -36,7 +37,6 @@ Plugin 'honza/vim-snippets' "代码片段库
 Plugin 'haskell.vim' "Haskell language
 Plugin 'leafgarland/typescript-vim' "typescript高亮
 Plugin 'pangloss/vim-javascript' "javascript高亮
-Plugin 'reasonml-editor/vim-reason' "reasonml
 Plugin 'mxw/vim-jsx' "react高亮
 Plugin 'tpope/vim-rails' "rails.vim
 Plugin 'luochen1990/rainbow' "彩虹括号
@@ -59,59 +59,43 @@ filetype plugin indent on    " required
 "vundle设置完毕
 
 let mapleader=","
-"设置leader键为,
 
 set re=1
 
 set confirm
-" 在处理未保存或只读文件的时候，弹出确认
 
 if !exists("g:syntax_on")
   syntax enable
 endif
-" 语法高亮
 
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
-" 用浅色高亮当前行
 
 set smartindent
-" 智能对齐
-
 set autoindent
-" 自动对齐
 
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 set shiftround
-"  统一缩进为2
-
 
 set number
-" 显示行号
-
 set history=50
-" 历史纪录数
-
 set hlsearch
 set incsearch
-" 搜索逐字符高亮
-
 set gdefault
-" 行内替换
 
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
-" 编码设置
 
 if !has('gui_running')
   set t_Co=256
+  let g:dracula_italic=0
   if has('termguicolors') && !exists('$TMUX')
     set termguicolors
   end
-  colorscheme dracula
+  colorscheme Dracula
   let lightlineColor = 'Dracula'
 
   if exists('$TMUX')
@@ -125,6 +109,7 @@ if !has('gui_running')
   endif
 
   set timeoutlen=1000 ttimeoutlen=0
+  highlight Normal ctermbg=NONE
 else
   if strftime('%H') >= 21 || strftime('%H') <= 9
     set background=dark
@@ -138,41 +123,28 @@ endif
 
 
 set guifont=monofur\ for\ Powerline:h20
-" 设置字体
-
 set langmenu=zn_CN.UTF-8
 set helplang=cn
-" 语言设置
 
 set cmdheight=2
-" 命令行（在状态行）的高度，默认为1,这里是2
 
 set ruler
-" 在编辑过程中，在右下角显示光标位置的状态行
 
 set laststatus=2
-" 总是显示状态行
 
 set showcmd
-" 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
 
 set scrolloff=3
-" 光标移动到buffer的顶部和底部时保持3行距离
 
 set showmatch
-" 高亮显示对应的括号
 
 set matchtime=5
-" 对应括号高亮的时间（单位是十分之一秒）
 
 set autowrite
-" 在切换buffer时自动保存当前文件
 
 set wildmenu
-" 增强模式中的命令行自动完成操作
 
 set linespace=2
-" 字符间插入的像素行数目
 
 set foldmethod=indent
 set nofoldenable
@@ -378,7 +350,56 @@ let g:goyo_height = '100%'
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#585858'
 nmap <F4> :Goyo<CR>
+function! s:goyo_leave()
+  set showmode
+  set showcmd
+  Limelight!
+  if !has('gui_running')
+    highlight Normal ctermbg=NONE
+  endif
+endfunction
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "vim-slime
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
+
+"ocaml
+let ocaml_revised = 1
+" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+let s:opam_share_dir = system("opam config var share")
+let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+
+let s:opam_configuration = {}
+
+function! OpamConfOcpIndent()
+  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+endfunction
+let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+
+function! OpamConfOcpIndex()
+  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+endfunction
+let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+
+function! OpamConfMerlin()
+  let l:dir = s:opam_share_dir . "/merlin/vim"
+  execute "set rtp+=" . l:dir
+endfunction
+let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+
+let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+for tool in s:opam_packages
+  " Respect package order (merlin should be after ocp-index)
+  if count(s:opam_available_tools, tool) > 0
+    call s:opam_configuration[tool]()
+  endif
+endfor
+" ## end of OPAM user-setup addition for vim / base ## keep this line
+" ## added by OPAM user-setup for vim / ocp-indent ## e0a4c6af0df1be738d65ab08d9b21e27 ## you can edit, but keep this line
+if count(s:opam_available_tools,"ocp-indent") == 0
+  source "/Users/mirone/.opam/4.02.3+buckle-1/share/vim/syntax/ocp-indent.vim"
+endif
+" ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
