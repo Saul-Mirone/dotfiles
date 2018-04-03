@@ -17,6 +17,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-obsession'
+Plug 'jpalardy/vim-slime'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
@@ -25,7 +26,6 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'severin-lemaignan/vim-minimap', { 'on': ['Minimap', 'MinimapToggle'] }
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
-Plug 'jpalardy/vim-slime', { 'on': ['SlimeRegionSend', 'SlimeParagraphSend'] }
 
 Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
@@ -39,6 +39,10 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 call plug#end()
+
+filetype on
+filetype indent on
+filetype plugin on
 
 let mapleader=","
 
@@ -74,6 +78,7 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 if !has('gui_running')
   set t_Co=256
   let g:dracula_italic=0
+  let g:dracula_colorterm = 0
   if has('termguicolors') && !exists('$TMUX')
     set termguicolors
   end
@@ -91,7 +96,6 @@ if !has('gui_running')
   endif
 
   set timeoutlen=1000 ttimeoutlen=0
-  highlight Normal ctermbg=NONE
 else
   if strftime('%H') >= 21 || strftime('%H') <= 9
     set background=dark
