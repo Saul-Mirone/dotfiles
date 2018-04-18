@@ -149,7 +149,7 @@ let NERDTreeWinPos="right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Open a NERDTree
 nmap <F5> :NERDTreeToggle<CR>
-let g:NERDTreeLimitedSyntax = 1
+let g:NERDTreeHighlightCursorline = 0
 
 " Tagbar
 let g:tagbar_width=20
