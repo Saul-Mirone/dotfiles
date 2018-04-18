@@ -18,8 +18,10 @@ Plug 'honza/vim-snippets'
 Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-obsession'
 Plug 'jpalardy/vim-slime'
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'vim-scripts/Tagbar', { 'on': 'TagbarToggle' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
@@ -33,10 +35,10 @@ Plug 'bitc/lushtags', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do' : 'make', 'for': 'haskell' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-Plug 'vim-scripts/npm.vim', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'vim-scripts/npm.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
 call plug#end()
 
@@ -108,7 +110,7 @@ else
 endif
 
 
-set guifont=monofur\ for\ Powerline:h20
+set guifont=Roboto\ Mono\ Light\ for\ Powerline:h20
 set langmenu=zn_CN.UTF-8
 set helplang=cn
 
@@ -147,6 +149,7 @@ let NERDTreeWinPos="right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Open a NERDTree
 nmap <F5> :NERDTreeToggle<CR>
+let g:NERDTreeLimitedSyntax = 1
 
 " Tagbar
 let g:tagbar_width=20
@@ -326,6 +329,10 @@ nmap <F4> :Goyo<CR>
 "vim-slime
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
+
+"typescript-vim
+let g:typescript_compiler_binary = ''
+let g:typescript_compiler_options = ''
 
 "ocaml
 let ocaml_revised = 1
