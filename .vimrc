@@ -19,6 +19,7 @@ Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-obsession'
 Plug 'jpalardy/vim-slime'
 Plug 'ryanoasis/vim-devicons'
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
@@ -35,6 +36,7 @@ Plug 'bitc/lushtags', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do' : 'make', 'for': 'haskell' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'vim-scripts/npm.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
@@ -152,6 +154,18 @@ nmap <F5> :NERDTreeToggle<CR>
 let g:NERDTreeHighlightCursorline = 0
 
 " Tagbar
+set tags=./.tags;,.tags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+if !isdirectory(s:vim_tags)
+    silent! call mkdir(s:vim_tags, 'p')
+endif
+
 let g:tagbar_width=20
 let g:tagbar_autofocus=1
 let g:tagbar_left = 1
@@ -330,10 +344,6 @@ nmap <F4> :Goyo<CR>
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
 
-"typescript-vim
-let g:typescript_compiler_binary = ''
-let g:typescript_compiler_options = ''
-
 "ocaml
 let ocaml_revised = 1
 " ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
@@ -370,7 +380,7 @@ endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line
 " ## added by OPAM user-setup for vim / ocp-indent ## e0a4c6af0df1be738d65ab08d9b21e27 ## you can edit, but keep this line
 if count(s:opam_available_tools,"ocp-indent") == 0
-  source "/Users/mirone/.opam/4.02.3+buckle-1/share/vim/syntax/ocp-indent.vim"
+  source s:opam_share_dir . "/vim/syntax/ocp-indent.vim"
 endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
 "
