@@ -20,7 +20,10 @@ Plug 'tpope/vim-obsession'
 Plug 'jpalardy/vim-slime'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ludovicchabant/vim-gutentags'
+
 Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
@@ -196,6 +199,9 @@ let g:tagbar_type_typescript = {
 " tabular
 nnoremap <leader>t :Tab/
 vnoremap <leader>t :Tab/
+
+" fzf
+nnoremap <C-p> :FZF<cr>
 
 " Ale
 let g:ale_linters = {
