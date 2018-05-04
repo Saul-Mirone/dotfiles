@@ -20,6 +20,7 @@ Plug 'tpope/vim-obsession'
 Plug 'jpalardy/vim-slime'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'Shougo/deoplete.nvim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
@@ -152,6 +153,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Open a NERDTree
 nmap <F5> :NERDTreeToggle<CR>
 let g:NERDTreeHighlightCursorline = 0
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 " Tagbar
 set tags=./.tags;,.tags
