@@ -21,6 +21,12 @@ Plug 'jpalardy/vim-slime'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ludovicchabant/vim-gutentags'
 
+" LSP
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -37,7 +43,7 @@ Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'bitc/lushtags', { 'for': 'haskell' }
-Plug 'Shougo/vimproc.vim', { 'do' : 'make', 'for': 'haskell' }
+Plug 'Shougo/vimproc.vim', { 'do': 'make', 'for': 'haskell' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
@@ -45,6 +51,8 @@ Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'vim-scripts/npm.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'vim-scripts/java_getset.vim', { 'for': 'java' }
 
 call plug#end()
 
@@ -111,7 +119,7 @@ else
     set background=light
   endif
   colorscheme solarized
-  call togglebg#map("<F2>")
+  call togglebg#map("<F9>")
   let lightlineColor = 'solarized'
 endif
 
@@ -159,6 +167,8 @@ let g:NERDTreeHighlightCursorline = 0
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_start_length = 2
+set completefunc=LanguageClient#complete
 
 " Tagbar
 set tags=./.tags;,.tags
@@ -208,16 +218,21 @@ let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint', 'tsserver'],
 \  'haskell': ['stack-ghc-mod', 'hlint'],
-\  'cpp': ['clang', 'cpplint']
+\  'cpp': ['clang', 'cpplint'],
 \}
+let g:ale_open_list = 'on_save'
 let g:ale_echo_cursor = 1
-let g:ale_open_list = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
 
 let g:ale_echo_msg_format = '[%linter%] %s'
+
 nnoremap <leader>e :ALEToggle<cr>
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
@@ -225,6 +240,10 @@ if !has('gui_running')
   highlight ALEError cterm=underline
   highlight ALEWarning cterm=underline
 endif
+
+"LSP
+let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_loggingLevel = "ERROR"
 
 " lightline
 set laststatus=2 " Always display the status line
@@ -353,6 +372,22 @@ nmap <F4> :Goyo<CR>
 "vim-slime
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
+
+"ultisnips
+let g:UltiSnipsEditSplit = "tabdo"
+
+"java
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+"
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'typescript': ['typescript-language-server', '--stdio']
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 "ocaml
 let ocaml_revised = 1
