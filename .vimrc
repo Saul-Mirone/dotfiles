@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 "Plug 'Saul-Mirone/dracula-vim' "dracula theme
 Plug 'dracula/vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'vim-scripts/L9'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
@@ -27,9 +28,13 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
@@ -46,6 +51,7 @@ Plug 'bitc/lushtags', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make', 'for': 'haskell' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+"Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'vim-scripts/npm.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -93,13 +99,20 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 
 if !has('gui_running')
   set t_Co=256
-  let g:dracula_italic=0
-  let g:dracula_colorterm = 0
   if has('termguicolors') && !exists('$TMUX')
     set termguicolors
   end
-  colorscheme Dracula
-  let lightlineColor = 'Dracula'
+  " old theme S
+  " let g:dracula_italic=0
+  " let g:dracula_colorterm = 0
+  " colorscheme Dracula
+  " let lightlineColor = 'Dracula'
+  " old theme E
+
+  let g:seoul256_light_background = 254
+  colo seoul256-light
+  " hi Normal ctermbg=NONE
+  let lightlineColor = 'seoul256'
 
   if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
@@ -124,7 +137,7 @@ else
 endif
 
 
-set guifont=Roboto\ Mono\ Light\ for\ Powerline:h20
+set guifont=Hack\ Nerd\ Font:h20
 set langmenu=zn_CN.UTF-8
 set helplang=cn
 
@@ -168,6 +181,8 @@ let g:NERDTreeHighlightCursorline = 0
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 2
+let g:deoplete#auto_complete_delay = 100
+let g:deoplete#disable_auto_complete = 1
 set completefunc=LanguageClient#complete
 
 " Tagbar
@@ -339,7 +354,7 @@ map <leader>ghce :GhcModTypeClear<CR>
 let g:rainbow_active = 1
 let g:rainbow_conf = {
 \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\	'ctermfgs': ['darkblue', 'darkyellow', 'darkcyan', 'darkmagenta'],
 \	'operators': '_,_',
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \	'separately': {
