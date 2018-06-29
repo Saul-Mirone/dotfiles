@@ -1,6 +1,8 @@
-export PATH="$HOME/.local/bin:$HOME/Library/Haskell/bin:$HOME/.rvm/bin:/usr/local/opt/llvm/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin:$HOME/Library/Haskell/bin:$HOME/.rvm/bin:/usr/local/opt/llvm/bin:/usr/local/opt/openssl/bin"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias vim="nvim"
+alias vi="nvim"
 
 alias tmux='tmux -2'
 if [ "$TERM" != "xterm-256color" ]; then

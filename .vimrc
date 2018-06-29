@@ -1,5 +1,12 @@
 set rtp+=/usr/local/opt/fzf
-call plug#begin('~/.vim/plugged')
+
+if has('nvim')
+  set rtp+=~/.local/share/nvim
+  call plug#begin('~/.local/share/nvim/plugged')
+else
+  set rtp+=~/.vim
+  call plug#begin('~/.vim/plugged')
+endif
 
 Plug 'altercation/vim-colors-solarized'
 "Plug 'Saul-Mirone/dracula-vim' "dracula theme
@@ -114,14 +121,16 @@ if !has('gui_running')
   " hi Normal ctermbg=NONE
   let lightlineColor = 'seoul256'
 
-  if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
-    let &t_SR = "\<Esc>Ptmux;\<Esc>\e[4 q\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
-  else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  if !has('nvim')
+    if exists('$TMUX')
+      let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+      let &t_SR = "\<Esc>Ptmux;\<Esc>\e[4 q\<Esc>\\"
+      let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+    else
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+      let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
   endif
 
   set timeoutlen=1000 ttimeoutlen=0
@@ -390,6 +399,13 @@ let g:slime_paste_file = tempname()
 
 "ultisnips
 let g:UltiSnipsEditSplit = "tabdo"
+
+if has('nvim')
+  let g:UltiSnipsSnippetsDir="~/.local/share/nvim/UltiSnips"
+else
+  let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+endif
+
 
 "java
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
