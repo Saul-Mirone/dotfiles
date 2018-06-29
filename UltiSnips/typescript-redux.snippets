@@ -1,6 +1,11 @@
 priority -50
 
+snippet actiont "action type for visual" "snip.visual_text" be
+export const ${1:${VISUAL}}: '$1' = '$1';
+export type $1 = typeof $1;
+endsnippet
+
 snippet actiont "action type" b
-export const ${1:action_name}: '$1' = '$1';
+export const ${1:YOUR_ACTION}: '$1' = '$1';
 export type $1 = typeof $1;
 endsnippet
