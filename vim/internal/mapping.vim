@@ -7,11 +7,11 @@ vnoremap <leader>tab :Tab/
 
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
-nnoremap <leader>at :ALEToggle<cr>
-nnoremap <leader>ah :ALEGoToDefinition<cr>
-nnoremap <leader>af :ALEGoToDefinitionInTab<cr>
-vnoremap <leader>ah :ALEHover<cr>
-vnoremap <leader>af :ALEFindReferences<cr>
+nnoremap <leader>as :ALEToggle<cr>
+nnoremap <leader>ag :ALEGoToDefinition<cr>
+nnoremap <leader>at :ALEGoToDefinitionInTab<cr>
+nnoremap <leader>ah :ALEHover<cr>
+nnoremap <leader>af :ALEFindReferences<cr>
 
 nnoremap <leader>pa :Ag
 nnoremap <leader>pp :FZF<cr>
