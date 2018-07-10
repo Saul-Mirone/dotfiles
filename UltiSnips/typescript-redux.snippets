@@ -1,5 +1,13 @@
 priority -50
 
+global !p
+import re
+def camel_to_snakes(input):
+	return re.sub("([A-Z])", "_\\1", input).upper().lstrip("_")
+def lower_first(input):
+	return input[:1].lower() + input[1:]
+endglobal
+
 snippet actiont "action type for visual" "snip.visual_text" be
 export const ${1:${VISUAL}}: '$1' = '$1';
 export type $1 = typeof $1;
@@ -8,4 +16,15 @@ endsnippet
 snippet actiont "action type" b
 export const ${1:YOUR_ACTION}: '$1' = '$1';
 export type $1 = typeof $1;
+endsnippet
+
+snippet action "action" b
+export interface I${1:ActionType} {
+	type: `!p snip.rv = camel_to_snakes(t[1])`;
+}
+export function `!p snip.rv=lower_first(t[1])`(): I$1 {
+	return {
+		type: `!p snip.rv = camel_to_snakes(t[1])`
+	};
+}
 endsnippet
