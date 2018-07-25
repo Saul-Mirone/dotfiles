@@ -3,6 +3,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 
 so <sfile>:p:h/git.vim

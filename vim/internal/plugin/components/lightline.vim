@@ -5,12 +5,16 @@ function ConfigureLightLine()
   \ 'colorscheme': g:lightlineColor,
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'session' ] ],
+  \             [ 'gitbranch', 'bufnum', 'readonly'] ],
   \   'right': [ ['lineinfo'],
   \              ['percent'],
   \              ['linter_warnings', 'linter_errors', 'linter_ok'],
   \              ['fileformat'],
 	\              ['fileencoding'] ]
+  \ },
+  \ 'tabline': {
+  \   'left': [ ['tabs'] ],
+  \   'right': [ ['session'] ]
   \ },
 	\ 'component_expand': {
 	\   'linter_warnings': 'LightlineLinterWarnings',
