@@ -16,7 +16,6 @@ so <sfile>:p:h/fzf.vim
 so <sfile>:p:h/ultisnips.vim
 so <sfile>:p:h/goyo.vim
 so <sfile>:p:h/slime.vim
-so <sfile>:p:h/tags.vim
 
 function ConfigureComponents()
   call ConfigureGit()
@@ -27,5 +26,4 @@ function ConfigureComponents()
   call ConfigureUltiSnips()
   call ConfigureGoyo()
   call ConfigureSlime()
-  call ConfigureTags()
 endfunction
