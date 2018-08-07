@@ -17,6 +17,8 @@ so <sfile>:p:h/ultisnips.vim
 so <sfile>:p:h/goyo.vim
 so <sfile>:p:h/slime.vim
 
+so <sfile>:p:h/im.vim
+
 function ConfigureComponents()
   call ConfigureGit()
   call ConfigureNERDTree()
@@ -26,4 +28,6 @@ function ConfigureComponents()
   call ConfigureUltiSnips()
   call ConfigureGoyo()
   call ConfigureSlime()
+
+  call ConfigureIM()
 endfunction
