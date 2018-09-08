@@ -1,3 +1,3 @@
 function ConfigureCpp()
-  let g:ale_linters.cpp = ['clangtidy']
+  let g:ale_linters.cpp = ['clangtidy', 'cquery']
 endfunction
