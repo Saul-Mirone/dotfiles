@@ -17,6 +17,7 @@ set hlsearch
 set gdefault
 
 set encoding=utf-8
+set termencoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
 
 set cmdheight=2

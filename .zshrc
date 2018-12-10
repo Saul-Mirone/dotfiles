@@ -1,13 +1,27 @@
+source /usr/local/share/antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle z
+antigen bundle extract
+antigen bundle vi-mode
+
+# antigen theme robbyrussell
+antigen theme sobolevn/sobole-zsh-theme
+
+antigen apply
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/mirone/.oh-my-zsh
+# export ZSH=/Users/mirone/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="dracula"
+# ZSH_THEME="dracula"
+# ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,9 +65,9 @@ ZSH_THEME="dracula"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z extract vi-mode rails stack)
+#plugins=(git z extract vi-mode rails stack)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
