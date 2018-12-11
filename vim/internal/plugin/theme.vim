@@ -1,7 +1,8 @@
 if has('gui_running')
   Plug 'altercation/vim-colors-solarized'
 else
-  Plug 'junegunn/seoul256.vim'
+  Plug 'arcticicestudio/nord-vim'
+  "Plug 'junegunn/seoul256.vim'
   "Plug 'dracula/vim', { 'as': 'dracula' }
 endif
 
@@ -12,9 +13,12 @@ function! ConfigureTheme()
       set termguicolors
     end
 
-    let g:seoul256_light_background = 254
-    colo seoul256-light
-    let g:lightlineColor = 'seoul256'
+    colo nord
+    let g:lightlineColor = 'nord'
+
+    "let g:seoul256_light_background = 254
+    "colo seoul256-light
+    "let g:lightlineColor = 'seoul256'
 
     " for dark start
     " let g:dracula_italic = 0
