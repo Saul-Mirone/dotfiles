@@ -33,6 +33,10 @@ set nofoldenable
 
 set showtabline=2  " Show tabline
 
+set cursorline
+set conceallevel=1
+hi Conceal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+
 if has('gui_running')
   set guifont=Hack\ Nerd\ Font:h16
   set guioptions-=e  " Don't use GUI tabline

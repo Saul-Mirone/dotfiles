@@ -13,6 +13,7 @@ function! ConfigureTheme()
       set termguicolors
     end
 
+    set termguicolors
     colo nord
     let g:lightlineColor = 'nord'
 

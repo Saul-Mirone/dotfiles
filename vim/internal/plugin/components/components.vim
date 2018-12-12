@@ -6,10 +6,9 @@ so <sfile>:p:h/fzf.vim
 so <sfile>:p:h/ultisnips.vim
 so <sfile>:p:h/goyo.vim
 so <sfile>:p:h/slime.vim
+so <sfile>:p:h/indent.vim
 
 Plug 'tpope/vim-sensible'
-"Plug 'Yggdroot/indentLine'
-Plug 'thaerkh/vim-indentguides'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-unimpaired'
@@ -27,4 +26,5 @@ function ConfigureComponents()
   call ConfigureUltiSnips()
   call ConfigureGoyo()
   call ConfigureSlime()
+  call ConfigureIndent()
 endfunction
