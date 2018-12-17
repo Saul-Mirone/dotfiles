@@ -35,6 +35,7 @@ set showtabline=2  " Show tabline
 
 set cursorline
 set conceallevel=1
+set concealcursor=nc
 hi Conceal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
 if has('gui_running')
