@@ -13,11 +13,12 @@ function! ConfigureTheme()
       set termguicolors
     end
 
-    set termguicolors
+    "set termguicolors
+
     colo nord
     let g:lightlineColor = 'nord'
 
-    "let g:seoul256_light_background = 254
+    "let g:seoul256_light_background = 253
     "colo seoul256-light
     "let g:lightlineColor = 'seoul256'
 

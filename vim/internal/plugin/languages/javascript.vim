@@ -2,8 +2,8 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
 function ConfigureJavascript()
-  let g:ale_linters.javascript = ['eslint', 'tsserver']
-  let g:ale_fixers.javascript = ['eslint']
+  "let g:ale_linters.javascript = ['eslint', 'tsserver']
+  "let g:ale_fixers.javascript = ['eslint']
 
   let g:javascript_plugin_jsdoc = 1
   let g:javascript_conceal_function             = "ƒ"

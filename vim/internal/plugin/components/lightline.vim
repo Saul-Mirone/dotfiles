@@ -8,7 +8,7 @@ function ConfigureLightLine()
   \             [ 'gitbranch', 'bufnum', 'readonly'] ],
   \   'right': [ ['lineinfo'],
   \              ['percent'],
-  \              ['linter_warnings', 'linter_errors', 'linter_ok'],
+  \              ['linter_warnings', 'linter_errors', 'linter_hint', 'linter_info', 'linter_ok'],
   \              ['fileformat'],
 	\              ['fileencoding'] ]
   \ },
@@ -19,6 +19,8 @@ function ConfigureLightLine()
 	\ 'component_expand': {
 	\   'linter_warnings': 'LightlineLinterWarnings',
 	\   'linter_errors': 'LightlineLinterErrors',
+	\   'linter_info': 'LightlineLinterInfo',
+	\   'linter_hint': 'LightlineLinterHints',
 	\   'linter_ok': 'LightlineLinterOK',
 	\   'lineinfo': 'LineInfo'
 	\ },
@@ -26,6 +28,8 @@ function ConfigureLightLine()
 	\   'readonly': 'error',
 	\   'linter_warnings': 'warning',
 	\   'linter_errors': 'error',
+	\   'linter_info': 'tabsel',
+	\   'linter_hint': 'middle',
 	\   'linter_ok': 'ok'
 	\ },
   \ 'component_visible_condition': {
@@ -34,6 +38,7 @@ function ConfigureLightLine()
   \ 'component_function': {
   \   'gitbranch': 'LightlineFugitive',
   \   'readonly': 'LightlineReadonly',
+  \   'cocstatus': 'coc#status'
   \ },
   \ 'component': {
   \   'lineinfo': ' %3l:%-2v',
@@ -45,7 +50,9 @@ function ConfigureLightLine()
   \ },
 	\ }
 
-	autocmd User ALELintPost call s:MaybeUpdateLightline()
+	"autocmd User ALELintPost call s:MaybeUpdateLightline()
+  autocmd User CocDiagnosticChange call lightline#update()
+
 	function! s:MaybeUpdateLightline()
 		if exists('#lightline')
 			call lightline#update()
@@ -70,21 +77,43 @@ function LightlineFugitive()
 endfunction
 
 function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+  let info = get(b:, 'coc_diagnostic_info', 0)
+  if empty(info) || get(info, 'warning', 0) == 0
+    return ''
+  endif
+  return printf('%d ◆', info['warning'])
 endfunction
 
 function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+  let info = get(b:, 'coc_diagnostic_info', 0)
+  if empty(info) || get(info, 'error', 0) == 0
+    return ''
+  endif
+  return printf('%d ✗', info['error'])
+endfunction
+
+function! LightlineLinterInfo() abort
+  let info = get(b:, 'coc_diagnostic_info', 0)
+  if empty(info) || get(info, 'information', 0) == 0
+    return ''
+  endif
+  return printf('%d ●', info['information'])
+endfunction
+
+function! LightlineLinterHints() abort
+  let info = get(b:, 'coc_diagnostic_info', 0)
+  if empty(info) || get(info, 'hints', 0) == 0
+    return ''
+  endif
+  return printf('%d ○', info['hits'])
 endfunction
 
 function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  return l:counts.total == 0 ? '✓ ' : ''
+  let info = get(b:, 'coc_diagnostic_info', 0)
+  if empty(info) || (get(info, 'error', 0) == 0 && get(info, 'warning', 0) == 0 )
+    return '✓'
+  endif
+  return ''
 endfunction
 
 function! LineInfo()

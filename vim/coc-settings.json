@@ -1,0 +1,23 @@
+{
+  "languageserver": {
+    "haskell": {
+      "command": "hie-wrapper",
+      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {},
+      "settings": {
+        "languageServerHaskell": {
+          "hlintOn": true,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
+      }
+    }
+  },
+  "diagnostic": {
+    "errorSign": "✗",
+    "warningSign": "◆",
+    "infoSign": "●",
+    "hintSign": "○"
+  }
+}
