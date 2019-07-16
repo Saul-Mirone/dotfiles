@@ -1,4 +1,6 @@
 {
+  "eslint.filetypes": ["typescript", "javascript", "typescriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "typescriptreact"],
   "languageserver": {
     "haskell": {
       "command": "hie-wrapper",
