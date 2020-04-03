@@ -10,6 +10,8 @@ so <sfile>:p:h/indent.vim
 so <sfile>:p:h/vista.vim
 so <sfile>:p:h/coc.vim
 
+so <sfile>:p:h/terminal.vim
+
 Plug 'tpope/vim-sensible'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-obsession'
@@ -34,4 +36,5 @@ function ConfigureComponents()
   call ConfigureIndent()
   call ConfigureVista()
   call ConfigureCOC()
+  call ConfigureTerminal()
 endfunction
